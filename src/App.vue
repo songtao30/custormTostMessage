@@ -1,28 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button @click="test">点击显示提示框</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ConfirmComp from './components/ConfirmComp.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // eslint-disable-next-line vue/no-unused-components
+    ConfirmComp
+  },
+  methods: {
+    test() {
+      //调用方法,传递类型,内容
+      this.$confirm({
+        type: '提示',
+        msg: '您确定删除吗？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(() => {
+        //点击确定之后的回调函数
+        console.log('确定')
+      }).catch(() => {
+        //取消的回调函数
+        console.log('取消')
+      })
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
